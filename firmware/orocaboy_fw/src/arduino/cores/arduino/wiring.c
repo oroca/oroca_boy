@@ -39,7 +39,7 @@ extern "C" {
 */ 
 uint32_t micros( void )
 {
-	//return drv_micros();
+	return hwMicros();
   return 0;
 }
 

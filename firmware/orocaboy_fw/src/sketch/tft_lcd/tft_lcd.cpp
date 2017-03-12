@@ -436,7 +436,7 @@ unsigned long testFilledRoundRects() {
   tft.drawFrame();
   return micros() - start;
 }
-#else
+#elif 0
 #include "Arduino.h"
 
 
@@ -478,6 +478,17 @@ void mediabuttons();
 
 float p = 3.1415926;
 
+
+
+void frameISR(void)
+{
+  tft.drawFrame(false);
+}
+
+
+
+
+
 void setup(void) {
   Serial.begin(115200);
   Serial.print("Hello! ST7735 TFT Test");
@@ -486,20 +497,29 @@ void setup(void) {
   //tft.initR(INITR_BLACKTAB);   // initialize a ST7735S chip, black tab
 
   // Use this initializer (uncomment) if you're using a 1.44" TFT
-  tft.initR(INITR_144GREENTAB);   // initialize a ST7735S chip, black tab
+  tft.begin();   // initialize a ST7735S chip, black tab
 
   Serial.println("Initialized");
 
-  uint16_t time = millis();
-  tft.fillScreen(ST7735_BLACK);
-  time = millis() - time;
+  tft.startFrame(frameISR);
 
+  uint32_t t_time = micros();
+  uint32_t time = millis();
+  tft.fillScreen(ST7735_BLACK);
+  //tft.drawFrame();
+  tft.fillScreen(ST7735_BLUE);
+  //tft.drawFrame();
+  time = millis() - time;
+  t_time = micros() - t_time;
   Serial.println(time, DEC);
+  Serial.println(t_time, DEC);
+
   delay(500);
 
   // large block of text
   tft.fillScreen(ST7735_BLACK);
   testdrawtext((char *)"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur adipiscing ante sed nibh tincidunt feugiat. Maecenas enim massa, fringilla sed malesuada et, malesuada sit amet turpis. Sed porttitor neque ut ante pretium vitae malesuada nunc bibendum. Nullam aliquet ultrices massa eu hendrerit. Ut sed nisi lorem. In vestibulum purus a tortor imperdiet posuere. ", ST7735_WHITE);
+  //tft.drawFrame();
   delay(1000);
 
   // tft print function!
@@ -729,4 +749,144 @@ void mediabuttons() {
   // play color
   tft.fillTriangle(42, 20, 42, 60, 90, 40, ST7735_GREEN);
 }
+#else
+#include "Arduino.h"
+
+#include <SPI.h>
+#include "Adafruit_GFX.h"
+#include <Adafruit_ST7735.h>
+
+
+
+#define _BLACK   ST7735_BLACK
+#define _BLUE    ST7735_BLUE
+#define _RED     ST7735_RED
+#define _GREEN   ST7735_GREEN
+#define _CYAN    ST7735_CYAN
+#define _MAGENTA ST7735_MAGENTA
+#define _YELLOW  ST7735_YELLOW
+#define _WHITE   ST7735_WHITE
+
+
+
+
+#define TFT_CS     9
+#define TFT_RST    6
+#define TFT_DC     10
+
+Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS,  TFT_DC, TFT_RST);
+
+
+
+void setup() {
+  uint32_t t_time;
+
+  Serial.begin(9600);
+
+  tft.begin();
+
+
+
+
+  tft.setRotation(1);
+
+  tft.fillScreen(_BLACK);
+  tft.drawFrame();
+}
+
+
+void loop(void) {
+  static int x[8], y[8];
+  static int x_dir[8] = {0,};
+  static int x_width[8];
+  static int x_step[8];
+  static int x_color[8];
+  static int cnt = 0;
+  static int radius = 0;
+  static int radius_dir = 0;
+
+  int block_size = 10;
+  int block_gap  = 12;
+  uint32_t t_time;
+  int i;
+
+
+  x_width[0] = block_size;  y[0] =              0;  x_step[0] = 1; x_color[0] = _RED;
+  x_width[1] = block_size;  y[1] =      block_gap;  x_step[1] = 2; x_color[1] = _BLUE;
+  x_width[2] = block_size;  y[2] = y[1]+block_gap;  x_step[2] = 3; x_color[2] = _GREEN;
+  x_width[3] = block_size;  y[3] = y[2]+block_gap;  x_step[3] = 4; x_color[3] = _CYAN;
+  x_width[4] = block_size;  y[4] = y[3]+block_gap;  x_step[4] = 5; x_color[4] = _MAGENTA;
+  x_width[5] = block_size;  y[5] = y[4]+block_gap;  x_step[5] = 6; x_color[5] = _YELLOW;
+  x_width[6] = block_size;  y[6] = y[5]+block_gap;  x_step[6] = 7; x_color[6] = _WHITE;
+
+
+  t_time = micros();
+
+
+  for(i=0; i<7; i++)
+  {
+    tft.fillRect(x[i], y[i], x_width[i], x_width[i], x_color[i]);
+  }
+
+
+  tft.fillCircle(60, 110, radius, _GREEN);
+  tft.fillCircle(100, 110, 20-radius, _BLUE);
+  tft.drawFrame();
+
+  tft.fillCircle(60, 110, radius, _BLACK);
+  tft.fillCircle(100, 110, 20-radius, _BLACK);
+
+  if (radius_dir)
+  {
+    radius--;
+    if (radius == 0) radius_dir ^= 1;
+  }
+  else
+  {
+    radius++;
+    if (radius >= 20) radius_dir ^= 1;
+  }
+
+  for(i=0; i<7; i++)
+  {
+    tft.fillRect(x[i], y[i], x_width[i], x_width[i], _BLACK);
+
+    if( x_dir[i] == 0 )
+      x[i] += x_step[i];
+    else
+      x[i] -= x_step[i];
+
+    if(x[i]>(tft.width())-x_width[i])
+    {
+      x_dir[i] ^= 1;
+      x[i] = (tft.width())-x_width[i];
+    }
+
+    if(x[i]<0)
+    {
+      x_dir[i] ^= 1;
+      x[i] = 0;
+    }
+  }
+
+  uint32_t process_time;
+
+  delay(20);
+
+  process_time = micros() - t_time;
+
+
+
+
+  tft.setCursor(0, 100);
+  tft.setTextColor(_GREEN, _BLACK);
+  tft.setTextSize(1);
+  tft.println((process_time/1000) + String(" ms "));
+
+  tft.setCursor(0, 110);
+  tft.println(1000/(process_time/1000) + String(" FPS  "));
+
+  tft.println(cnt++);
+}
+
 #endif

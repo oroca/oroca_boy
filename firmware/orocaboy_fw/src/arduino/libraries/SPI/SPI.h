@@ -79,11 +79,13 @@ class SPIClass {
     uint16_t transfer16(uint16_t data);
     void transfer(void *buf, size_t count);
     
-    void transferFast(void *buf, size_t count);
+    void transferFast(void *buf, size_t count, bool wait = true);
     void setBitOrder(uint8_t bitOrder);
     void setClockDivider(uint8_t clockDiv);
     void setDataMode(uint8_t dataMode);
     
+    void attachTxInterrupt(void (*func)());
+
   private:
     uint32_t _Mode;
     uint32_t _Direction;          

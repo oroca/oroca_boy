@@ -27,6 +27,23 @@ as well as Adafruit raw 1.8" TFT display
 #include "wiring_private.h"
 #include <SPI.h>
 
+
+
+#define USE_FRAME_BUFFER     1
+
+
+
+
+#if USE_FRAME_BUFFER == 1
+uint16_t frame_buf[128*128];
+#endif
+
+
+
+
+
+
+
 inline uint16_t swapcolor(uint16_t x) { 
   return (x << 11) | (x & 0x07E0) | (x >> 11);
 }
@@ -216,11 +233,11 @@ static const uint8_t PROGMEM
   Rcmd2green144[] = {              // Init for 7735R, part 2 (green 1.44 tab)
     2,                        //  2 commands in list:
     ST7735_CASET  , 4      ,  //  1: Column addr set, 4 args, no delay:
-      0x00, 0x00,             //     XSTART = 0
-      0x00, 0x7F,             //     XEND = 127
+      0x00,   0,             //     XSTART = 0
+      0x00, 127,             //     XEND = 127
     ST7735_RASET  , 4      ,  //  2: Row addr set, 4 args, no delay:
-      0x00, 0x00,             //     XSTART = 0
-      0x00, 0x7F },           //     XEND = 127
+      0x00,   0,             //     XSTART = 0
+      0x00, 127 },           //     XEND = 127
 
   Rcmd3[] = {                 // Init for 7735R, part 3 (red or green tab)
     4,                        //  4 commands in list:
@@ -321,8 +338,11 @@ void Adafruit_ST7735::initR(uint8_t options) {
   } else if(options == INITR_144GREENTAB) {
     _height = ST7735_TFTHEIGHT_144;
     commandList(Rcmd2green144);
-    colstart = 2;
-    rowstart = 3;
+    //colstart = 2;
+    //rowstart = 3;
+    colstart = 3;
+    rowstart = 2;
+
   } else {
     // colstart, rowstart left at default '0' values
     commandList(Rcmd2red);
@@ -369,6 +389,88 @@ void Adafruit_ST7735::pushColor(uint16_t color) {
 
   digitalWrite(_cs, HIGH);
 }
+
+
+
+#if USE_FRAME_BUFFER == 1
+
+void Adafruit_ST7735::drawPixel(int16_t x, int16_t y, uint16_t color) {
+
+  if((x < 0) ||(x >= _width) || (y < 0) || (y >= _height)) return;
+
+  frame_buf[y*_width+x] = color>>8 | color<<8;
+}
+
+
+void Adafruit_ST7735::drawFastVLine(int16_t x, int16_t y, int16_t h,
+ uint16_t color) {
+
+  // Rudimentary clipping
+  if((x >= _width) || (y >= _height)) return;
+  if((y+h-1) >= _height) h = _height-y;
+  //setAddrWindow(x, y, x, y+h-1);
+
+  color = color>>8 | color<<8;
+
+  for(int i=0; i<h; i++)
+  {
+    frame_buf[(y+i)*_width+x] = color;
+  }
+}
+
+
+void Adafruit_ST7735::drawFastHLine(int16_t x, int16_t y, int16_t w,
+  uint16_t color) {
+
+  // Rudimentary clipping
+  if((x >= _width) || (y >= _height)) return;
+  if((x+w-1) >= _width)  w = _width-x;
+  //setAddrWindow(x, y, x+w-1, y);
+
+  color = color>>8 | color<<8;
+
+  for(int i=0; i<w; i++)
+  {
+    frame_buf[y*_width+x+i] = color;
+  }
+
+}
+
+
+
+void Adafruit_ST7735::fillScreen(uint16_t color) {
+  fillRect(0, 0,  _width, _height, color);
+}
+
+
+
+// fill a rectangle
+void Adafruit_ST7735::fillRect(int16_t x, int16_t y, int16_t w, int16_t h,
+  uint16_t color) {
+
+  int32_t x_o = x;
+  int32_t y_o = y;
+
+  // rudimentary clipping (drawChar w/big text requires this)
+  if((x >= _width) || (y >= _height)) return;
+  if((x + w - 1) >= _width)  w = _width  - x;
+  if((y + h - 1) >= _height) h = _height - y;
+
+
+  uint8_t hi = color >> 8, lo = color;
+
+  color = lo<<8 | hi<<0;
+
+  for(y=0; y<h; y++) {
+    for(x=0; x<w; x++) {
+      frame_buf[(y_o+y)*_width+(x_o+x)] = color;
+    }
+  }
+}
+
+
+#else
+
 
 void Adafruit_ST7735::drawPixel(int16_t x, int16_t y, uint16_t color) {
 
@@ -471,6 +573,7 @@ void Adafruit_ST7735::fillRect(int16_t x, int16_t y, int16_t w, int16_t h,
 
   digitalWrite(_cs, HIGH);
 }
+#endif
 
 
 // Pass 8-bit (each) R,G,B, get back 16-bit packed color
@@ -553,6 +656,58 @@ void Adafruit_ST7735::setRotation(uint8_t m) {
 void Adafruit_ST7735::invertDisplay(boolean i) {
   writecommand(i ? ST7735_INVON : ST7735_INVOFF);
 }
+
+void Adafruit_ST7735::drawFrame(bool wait)
+{
+
+#if USE_FRAME_BUFFER == 1
+
+  if (wait == true)
+  {
+    setAddrWindow(0, 0, _width-1, _height-1);
+
+    digitalWrite(_rs, HIGH);
+    digitalWrite(_cs, LOW);
+
+    SPI.transferFast(frame_buf, _width*_height*2, wait);
+
+
+    digitalWrite(_cs, HIGH);
+  }
+  else
+  {
+    setAddrWindow(0, 0, _width-1, _height-1);
+
+    digitalWrite(_rs, HIGH);
+    digitalWrite(_cs, LOW);
+
+    SPI.transferFast(frame_buf, _width*_height*2, wait);
+
+
+    //digitalWrite(_cs, HIGH);
+  }
+
+#endif
+}
+
+void Adafruit_ST7735::startFrame(void (*func)())
+{
+
+#if USE_FRAME_BUFFER == 1
+  SPI.attachTxInterrupt(func);
+  drawFrame(false);
+#endif
+}
+
+void Adafruit_ST7735::endFrame(void)
+{
+
+#if USE_FRAME_BUFFER == 1
+  SPI.attachTxInterrupt(NULL);
+#endif
+}
+
+
 
 
 ////////// stuff not actively being used, but kept for posterity

@@ -95,17 +95,19 @@ void SPIClass::transfer(void *buf, size_t count) {
 }
 
 
-void SPIClass::transferFast(void *buf, size_t count) {
+void SPIClass::transferFast(void *buf, size_t count, bool wait) {
   uint32_t t_time;
 
-#if 0
-  drv_spi_start_dma_tx(_hspi, (uint8_t *)buf, count);
+
+  spiDmaStartTx(spi_port, (uint8_t *)buf, count);
 
   t_time = millis();
 
+  if (wait == false) return;
+
   while(1)
   {
-    if(drv_spi_is_dma_tx_done(_hspi))
+    if(spiDmaIsTxDone(spi_port))
     {
       break;
     }
@@ -114,7 +116,6 @@ void SPIClass::transferFast(void *buf, size_t count) {
       break;
     }
   }
-#endif
 }
 
 void SPIClass::setBitOrder(uint8_t bitOrder) {
@@ -165,4 +166,9 @@ void SPIClass::setClockDivider(uint8_t clockDiv) {
 void SPIClass::setDataMode(uint8_t dataMode){
 
   spiSetDataMode(spi_port, dataMode);
+}
+
+void SPIClass::attachTxInterrupt(void (*func)()){
+
+  spiAttachTxInterrupt(spi_port, func);
 }

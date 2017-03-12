@@ -23,6 +23,9 @@
 void hwInit(void);
 
 
+uint32_t hwMicros(void);
+
+
 #ifdef __cplusplus
  }
 #endif
