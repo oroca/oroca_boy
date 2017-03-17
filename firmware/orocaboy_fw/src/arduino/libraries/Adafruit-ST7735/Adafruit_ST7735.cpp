@@ -401,6 +401,13 @@ void Adafruit_ST7735::drawPixel(int16_t x, int16_t y, uint16_t color) {
   frame_buf[y*_width+x] = color>>8 | color<<8;
 }
 
+uint16_t Adafruit_ST7735::getPixel(int16_t x, int16_t y) {
+
+  if((x < 0) ||(x >= _width) || (y < 0) || (y >= _height)) return 0;
+
+  return frame_buf[y*_width+x];
+}
+
 
 void Adafruit_ST7735::drawFastVLine(int16_t x, int16_t y, int16_t h,
  uint16_t color) {

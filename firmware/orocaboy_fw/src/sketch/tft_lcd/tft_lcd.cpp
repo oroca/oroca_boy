@@ -751,7 +751,7 @@ void mediabuttons() {
 }
 #else
 #include "Arduino.h"
-
+#include <EEPROM.h>
 #include <SPI.h>
 #include "Adafruit_GFX.h"
 #include <Adafruit_ST7735.h>
@@ -781,7 +781,7 @@ Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS,  TFT_DC, TFT_RST);
 void setup() {
   uint32_t t_time;
 
-  Serial.begin(9600);
+  Serial.begin(115200);
 
   tft.begin();
 
@@ -792,6 +792,8 @@ void setup() {
 
   tft.fillScreen(_BLACK);
   tft.drawFrame();
+
+  //EEPROM.write(0, 199);
 }
 
 
@@ -887,6 +889,8 @@ void loop(void) {
   tft.println(1000/(process_time/1000) + String(" FPS  "));
 
   tft.println(cnt++);
+
+  Serial.println(EEPROM.read(0));
 }
 
 #endif

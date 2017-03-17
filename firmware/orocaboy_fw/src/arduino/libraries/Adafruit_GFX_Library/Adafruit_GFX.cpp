@@ -71,10 +71,10 @@ POSSIBILITY OF SUCH DAMAGE.
 #endif
 
 Adafruit_GFX::Adafruit_GFX(int16_t w, int16_t h):
-  WIDTH(w), HEIGHT(h)
+  LCD_WIDTH(w), LCD_HEIGHT(h)
 {
-  _width    = WIDTH;
-  _height   = HEIGHT;
+  _width    = LCD_WIDTH;
+  _height   = LCD_HEIGHT;
   rotation  = 0;
   cursor_y  = cursor_x    = 0;
   textsize  = 1;
@@ -652,13 +652,13 @@ void Adafruit_GFX::setRotation(uint8_t x) {
   switch(rotation) {
    case 0:
    case 2:
-    _width  = WIDTH;
-    _height = HEIGHT;
+    _width  = LCD_WIDTH;
+    _height = LCD_HEIGHT;
     break;
    case 1:
    case 3:
-    _width  = HEIGHT;
-    _height = WIDTH;
+    _width  = LCD_HEIGHT;
+    _height = LCD_WIDTH;
     break;
   }
 }
@@ -987,21 +987,21 @@ void GFXcanvas1::drawPixel(int16_t x, int16_t y, uint16_t color) {
     switch(rotation) {
      case 1:
       t = x;
-      x = WIDTH  - 1 - y;
+      x = LCD_WIDTH  - 1 - y;
       y = t;
       break;
      case 2:
-      x = WIDTH  - 1 - x;
-      y = HEIGHT - 1 - y;
+      x = LCD_WIDTH  - 1 - x;
+      y = LCD_HEIGHT - 1 - y;
       break;
      case 3:
       t = x;
       x = y;
-      y = HEIGHT - 1 - t;
+      y = LCD_HEIGHT - 1 - t;
       break;
     }
 
-    uint8_t *ptr = &buffer[(x / 8) + y * ((WIDTH + 7) / 8)];
+    uint8_t *ptr = &buffer[(x / 8) + y * ((LCD_WIDTH + 7) / 8)];
     if(color) *ptr |= pgm_read_byte(&GFXsetBit[x & 7]);
     else      *ptr &= pgm_read_byte(&GFXclrBit[x & 7]);
   }
@@ -1009,7 +1009,7 @@ void GFXcanvas1::drawPixel(int16_t x, int16_t y, uint16_t color) {
 
 void GFXcanvas1::fillScreen(uint16_t color) {
   if(buffer) {
-    uint16_t bytes = ((WIDTH + 7) / 8) * HEIGHT;
+    uint16_t bytes = ((LCD_WIDTH + 7) / 8) * LCD_HEIGHT;
     memset(buffer, color ? 0xFF : 0x00, bytes);
   }
 }
@@ -1037,21 +1037,21 @@ void GFXcanvas16::drawPixel(int16_t x, int16_t y, uint16_t color) {
     switch(rotation) {
      case 1:
       t = x;
-      x = WIDTH  - 1 - y;
+      x = LCD_WIDTH  - 1 - y;
       y = t;
       break;
      case 2:
-      x = WIDTH  - 1 - x;
-      y = HEIGHT - 1 - y;
+      x = LCD_WIDTH  - 1 - x;
+      y = LCD_HEIGHT - 1 - y;
       break;
      case 3:
       t = x;
       x = y;
-      y = HEIGHT - 1 - t;
+      y = LCD_HEIGHT - 1 - t;
       break;
     }
 
-    buffer[x + y * WIDTH] = color;
+    buffer[x + y * LCD_WIDTH] = color;
   }
 }
 
@@ -1059,9 +1059,9 @@ void GFXcanvas16::fillScreen(uint16_t color) {
   if(buffer) {
     uint8_t hi = color >> 8, lo = color & 0xFF;
     if(hi == lo) {
-      memset(buffer, lo, WIDTH * HEIGHT * 2);
+      memset(buffer, lo, LCD_WIDTH * LCD_HEIGHT * 2);
     } else {
-      uint16_t i, pixels = WIDTH * HEIGHT;
+      uint16_t i, pixels = LCD_WIDTH * LCD_HEIGHT;
       for(i=0; i<pixels; i++) buffer[i] = color;
     }
   }

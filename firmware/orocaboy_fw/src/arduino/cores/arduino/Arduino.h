@@ -74,6 +74,8 @@ typedef void (*voidFuncPtr)( void ) ;
 #endif
 
 
+#define _BV(bit) (1 << (bit))
+
 
 #ifdef __cplusplus
 } // extern "C"

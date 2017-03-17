@@ -149,6 +149,9 @@ class Adafruit_ST7735 : public Adafruit_GFX {
   void     startFrame(void (*func)());
   void     endFrame(void);
 
+  uint16_t getPixel(int16_t x, int16_t y);
+
+
   /* These are not for current use, 8-bit protocol only!
   uint8_t  readdata(void),
            readcommand8(uint8_t);

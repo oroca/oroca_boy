@@ -13,6 +13,7 @@
 
 #include "driver/uart.h"
 #include "driver/spi.h"
+#include "driver/eeprom.h"
 
 #ifdef __cplusplus
  extern "C" {

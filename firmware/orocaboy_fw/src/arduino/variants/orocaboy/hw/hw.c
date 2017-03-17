@@ -26,6 +26,7 @@ void hwInit(void)
 
   uartInit();
   spiInit();
+  eepromInit();
 }
 
 

@@ -64,6 +64,9 @@
 							<tool id="ilg.gnuarmeclipse.managedbuild.cross.tool.cpp.compiler.2031268175" name="Cross ARM GNU C++ Compiler" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.cpp.compiler">
 								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.compiler.include.paths.593782081" name="Include paths (-I)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.compiler.include.paths" useByScannerDiscovery="true" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/arduino/variants/orocaboy/lib/CMSIS/Include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/arduino/libraries/Arduboy/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/arduino/libraries/EEPROM/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/arduino/libraries/Arduboy2/src}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/arduino/libraries/Adafruit-ST7735}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/arduino/libraries/Waveshare_HX8347D}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/arduino/libraries/Adafruit_GFX_Library/fontconvert}&quot;"/>
@@ -114,7 +117,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="src/arduino/libraries/Adafruit-ST7735/examples|src/arduino/libraries/Adafruit_GFX_Library/fontconvert|src/arduino/libraries/Waveshare_HX8347D/examples|src/sketch/blink_led|src/arduino/libraries/SPI/examples" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="src/sketch/arduboy/ArduBreakout|src/sketch/arduboy/Squario-Gfx-Edit|src/sketch/arduboy/Tunes|src/sketch/arduboy/HelloWorld|src/sketch/tft_lcd|src/arduino/libraries/Arduboy/extras|src/arduino/libraries/Arduboy/examples|src/arduino/libraries/EEPROM/examples|src/arduino/libraries/Arduboy2/extras|src/arduino/libraries/Arduboy2/examples|src/arduino/libraries/Adafruit-ST7735/examples|src/arduino/libraries/Adafruit_GFX_Library/fontconvert|src/arduino/libraries/Waveshare_HX8347D/examples|src/sketch/blink_led|src/arduino/libraries/SPI/examples" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -197,7 +200,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="src/arduino/libraries/Adafruit-ST7735/examples|src/arduino/libraries/Adafruit_GFX_Library/fontconvert|src/arduino/libraries/Waveshare_HX8347D/examples|src/sketch/blink_led|src/arduino/libraries/SPI/examples" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="src/sketch/arduboy/ArduBreakout|src/sketch/arduboy/Squario-Gfx-Edit|src/sketch/arduboy/Tunes|src/sketch/arduboy/HelloWorld|src/sketch/tft_lcd|src/arduino/libraries/Arduboy/extras|src/arduino/libraries/Arduboy/examples|src/arduino/libraries/EEPROM/examples|src/arduino/libraries/Arduboy2/extras|src/arduino/libraries/Arduboy2/examples|src/arduino/libraries/Adafruit-ST7735/examples|src/arduino/libraries/Adafruit_GFX_Library/fontconvert|src/arduino/libraries/Waveshare_HX8347D/examples|src/sketch/blink_led|src/arduino/libraries/SPI/examples" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>

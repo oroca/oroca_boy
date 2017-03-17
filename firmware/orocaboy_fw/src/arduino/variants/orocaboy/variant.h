@@ -31,7 +31,7 @@ extern "C"{
 
 
 
- 
+
 
 #define millis(a1)  HAL_GetTick(a1)
 #define delay(a2)   HAL_Delay(a2)
