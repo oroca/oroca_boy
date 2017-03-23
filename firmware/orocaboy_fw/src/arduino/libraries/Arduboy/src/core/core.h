@@ -46,17 +46,17 @@
 #define PIN_LEFT_BUTTON   A2
 #define PIN_RIGHT_BUTTON  A1
 #define PIN_UP_BUTTON     A0
-#define PIN_DOWN_BUTTON   A3
-#define PIN_A_BUTTON      7
-#define PIN_B_BUTTON      8
+#define PIN_DOWN_BUTTON   A7
+#define PIN_A_BUTTON      4
+#define PIN_B_BUTTON      5
 
 // bit values for button states
-#define LEFT_BUTTON     _BV(5)
-#define RIGHT_BUTTON    _BV(6)
-#define UP_BUTTON       _BV(7)
-#define DOWN_BUTTON     _BV(4)
-#define A_BUTTON        _BV(3)
-#define B_BUTTON        _BV(2)
+#define LEFT_BUTTON     _BV(3)
+#define RIGHT_BUTTON    _BV(1)
+#define UP_BUTTON       _BV(0)
+#define DOWN_BUTTON     _BV(2)
+#define A_BUTTON        _BV(6)
+#define B_BUTTON        _BV(7)
 
 #define PIN_SPEAKER_1 5
 #define PIN_SPEAKER_2 13

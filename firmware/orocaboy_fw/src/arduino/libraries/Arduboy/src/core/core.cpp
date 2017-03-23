@@ -272,8 +272,19 @@ uint8_t ArduboyCore::getInput()
 uint8_t ArduboyCore::buttonsState()
 {
   uint8_t buttons;
-  
-  buttons = 1;
-  
+#if 1
+  buttons = 0;
+  if(!digitalRead(PIN_UP_BUTTON)) buttons = UP_BUTTON;
+  if(!digitalRead(PIN_DOWN_BUTTON)) buttons |= DOWN_BUTTON;
+  if(!digitalRead(PIN_LEFT_BUTTON)) buttons |= LEFT_BUTTON;
+  if(!digitalRead(PIN_RIGHT_BUTTON)) buttons |= RIGHT_BUTTON;
+  if(!digitalRead(PIN_A_BUTTON)) buttons |= A_BUTTON;
+  if(!digitalRead(PIN_B_BUTTON)) buttons |= B_BUTTON;
+#else
+  // up, down, left, right
+  buttons = ((~(GPIOA->IDR)) & (uint32_t)(UP_BUTTON|DOWN_BUTTON|LEFT_BUTTON|RIGHT_BUTTON));
+  // A(left), B(right)
+  buttons |= ((~(GPIOB->IDR)) & (uint32_t)(A_BUTTON|B_BUTTON));
+#endif
   return buttons;
 }
