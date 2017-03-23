@@ -183,7 +183,7 @@ void ArduboyCore::paintScreen(unsigned char image[])
   uint8_t pixel;
   int index = 0;
 
-
+#if 1
   for(x=0; x<WIDTH; x++)
   {
     for(y=0; y<HEIGHT; y++)
@@ -206,7 +206,32 @@ void ArduboyCore::paintScreen(unsigned char image[])
       }
     }
   }
+#else
+  for(x=0; x<WIDTH; x++)
+  {
+    for(y=0; y<HEIGHT; y++)
+    {
+      int yOffset = abs(y) % 8;
+      int sRow = y / 8;
 
+      if(yOffset == 0)
+      {
+        pixel = image[sRow*WIDTH + x];
+      }
+
+      if(pixel & (1<<yOffset))
+      {
+        tft.drawPixel(x , y*2 + 0, _WHITE);
+        tft.drawPixel(x , y*2 + 1, _WHITE);
+      }
+      else
+      {
+        tft.drawPixel(x , y*2 + 0, _BLACK);
+        tft.drawPixel(x , y*2 + 1, _BLACK);
+      }
+    }
+  }
+#endif
   tft.drawFrame();
 }
 
