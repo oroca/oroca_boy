@@ -73,24 +73,15 @@ extern "C"{
 /*
  * Analog pins
  */
-static const uint8_t A0  = 16;
-static const uint8_t A1  = 17;
-static const uint8_t A2  = 18;
-static const uint8_t A3  = 19;
-static const uint8_t A4  = 20;
-static const uint8_t A5  = 21;
+static const uint8_t A0  = 14;
+static const uint8_t A1  = 15;
+static const uint8_t A2  = 16;
+static const uint8_t A3  = 17;
+static const uint8_t A4  = 18;
+static const uint8_t A5  = 19;
+static const uint8_t A6  = 20;
+static const uint8_t A7  = 21;
 static const uint8_t BAT = 29;
-
-
-
-
-
-
-
-
-
-
-
 
 
 

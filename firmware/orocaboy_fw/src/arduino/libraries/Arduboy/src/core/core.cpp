@@ -183,7 +183,7 @@ void ArduboyCore::paintScreen(unsigned char image[])
   uint8_t pixel;
   int index = 0;
 
-
+#if 1
   for(x=0; x<WIDTH; x++)
   {
     for(y=0; y<HEIGHT; y++)
@@ -206,7 +206,32 @@ void ArduboyCore::paintScreen(unsigned char image[])
       }
     }
   }
+#else
+  for(x=0; x<WIDTH; x++)
+  {
+    for(y=0; y<HEIGHT; y++)
+    {
+      int yOffset = abs(y) % 8;
+      int sRow = y / 8;
 
+      if(yOffset == 0)
+      {
+        pixel = image[sRow*WIDTH + x];
+      }
+
+      if(pixel & (1<<yOffset))
+      {
+        tft.drawPixel(x , y*2 + 0, _WHITE);
+        tft.drawPixel(x , y*2 + 1, _WHITE);
+      }
+      else
+      {
+        tft.drawPixel(x , y*2 + 0, _BLACK);
+        tft.drawPixel(x , y*2 + 1, _BLACK);
+      }
+    }
+  }
+#endif
   tft.drawFrame();
 }
 
@@ -272,8 +297,19 @@ uint8_t ArduboyCore::getInput()
 uint8_t ArduboyCore::buttonsState()
 {
   uint8_t buttons;
-  
-  buttons = 1;
-  
+#if 1
+  buttons = 0;
+  if(!digitalRead(PIN_UP_BUTTON)) buttons = UP_BUTTON;
+  if(!digitalRead(PIN_DOWN_BUTTON)) buttons |= DOWN_BUTTON;
+  if(!digitalRead(PIN_LEFT_BUTTON)) buttons |= LEFT_BUTTON;
+  if(!digitalRead(PIN_RIGHT_BUTTON)) buttons |= RIGHT_BUTTON;
+  if(!digitalRead(PIN_A_BUTTON)) buttons |= A_BUTTON;
+  if(!digitalRead(PIN_B_BUTTON)) buttons |= B_BUTTON;
+#else
+  // up, down, left, right
+  buttons = ((~(GPIOA->IDR)) & (uint32_t)(UP_BUTTON|DOWN_BUTTON|LEFT_BUTTON|RIGHT_BUTTON));
+  // A(left), B(right)
+  buttons |= ((~(GPIOB->IDR)) & (uint32_t)(A_BUTTON|B_BUTTON));
+#endif
   return buttons;
 }
