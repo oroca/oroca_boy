@@ -1,0 +1,46 @@
+# oroca boy
+#
+menu.device_variant=Variant
+menu.bootloader_version=Bootloader version
+menu.upload_method=Upload method
+
+orocaboy.bootloader.tool = dfu_util
+orocaboy.bootloader.file = opencr_boot.bin
+
+orocaboy.name=orocaboy
+orocaboy.upload.maximum_size=262144
+
+orocaboy.upload.file_type=bin
+orocaboy.upload.ram.maximum_size=65536
+orocaboy.upload.flash.maximum_size=262144
+orocaboy.upload.params.quiet=no
+
+orocaboy.build.mcu=cortex-m4
+orocaboy.build.f_cpu=
+orocaboy.build.board=orocaboy
+orocaboy.build.core=arduino
+orocaboy.build.common_flags=-mthumb  -DSTM32L432xx -D__OROCABOY__
+
+orocaboy.build.ldscript=bsp/ldscript/STM32L432KCUx_FLASH.ld
+orocaboy.build.variant=orocaboy
+orocaboy.build.variant_system_lib=lib_l432.a
+orocaboy.build.extra_flags=
+
+
+orocaboy.build.inc1=bsp
+orocaboy.build.inc2=hw/
+orocaboy.build.inc3=lib/CMSIS/Device/ST/STM32L4xx/Include
+orocaboy.build.inc4=lib/STM32L4xx_HAL_Driver/Inc
+orocaboy.build.inc5=lib/CMSIS/Include
+orocaboy.build.inc6=
+orocaboy.build.inc7=
+
+#orocaboy.upload.tool=orocaboy_ld
+#orocaboy.menu.upload_method.upload.tool=orocaboy_ld
+
+orocaboy.menu.upload_method.UploadMethod=OpenOCD
+orocaboy.menu.upload_method.UploadMethod.upload.protocol=openocd
+orocaboy.menu.upload_method.UploadMethod.upload.tool=openocd
+
+
+#openocd -f interface/stlink-v2-1.cfg -f target/stm32l4x.cfg -c "program sketch_apr24a.ino.elf" -c "reset run" -c shutdown
