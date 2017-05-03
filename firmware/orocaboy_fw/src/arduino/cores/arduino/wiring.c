@@ -43,6 +43,17 @@ uint32_t micros( void )
   return 0;
 }
 
+uint32_t millis(void)
+{
+  return HAL_GetTick();
+}
+
+extern void delay( uint32_t dwMs )
+{
+  HAL_Delay(dwMs);
+}
+
+
 #ifdef __cplusplus
 }
 #endif
