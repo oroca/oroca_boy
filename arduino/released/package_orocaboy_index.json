@@ -17,10 +17,10 @@
           "help": {
             "online": "https://github.com/oroca/oroca_boy"
           },
-          "url": "https://github.com/ROBOTIS-GIT/OpenCR/releases/download/1.0.0/opencr_core_1.0.0.tar.bz2",
-          "archiveFileName": "opencr_core_1.0.0.tar.bz2",
-          "checksum": "SHA-256:e5a7b6b9d5b5213c4aa9b9b7600dff5d5c979656859c049706edc1c33b12ee20",
-          "size": "829978",
+          "url": "https://github.com/oroca/oroca_boy/releases/download/0.0.1/orocaboy_core_0.0.1.tar.bz2",
+          "archiveFileName": "orocaboy_core_0.0.1.tar.bz2",
+          "checksum": "SHA-256:605cb62bf0bd93ee8e25aebd4384461739d03376a727024f1b7712ec96c4f651",
+          "size": "3821388",
           "help": {
                     "online": "https://github.com/oroca/oroca_boy"
           },
@@ -34,9 +34,9 @@
               "version": "5.4.0-2016q2"
             },
             {
-              "packager": "OpenCR",
-              "name": "opencr_tools",
-              "version": "1.0.0"
+              "packager": "OROCA_BOY",
+              "name": "orocaboy_tools",
+              "version": "0.0.1"
             }
 
           ]
@@ -79,36 +79,36 @@
           ]
         },
         {
-          "name": "openocd_tools",
-          "version": "1.0.0",
+          "name": "orocaboy_tools",
+          "version": "0.0.1",
           "systems": [
             {
               "host": "i686-linux-gnu",
-              "url": "https://github.com/ROBOTIS-GIT/OpenCR/releases/download/1.0.0/opencr_tools_1.0.0.tar.bz2",
-              "archiveFileName": "opencr_tools_1.0.0.tar.bz2",
-              "checksum": "SHA-256:86b547dc98e07c90f17e0a6c45b207153ee8b4344da841f26956f495295a3a6a",
-              "size": "513792"
+              "url": "https://github.com/oroca/oroca_boy/releases/download/0.0.1/orocaboy_tools_0.0.1.tar.bz2",
+              "archiveFileName": "orocaboy_tools_0.0.1.tar.bz2",
+              "checksum": "SHA-256:605cb62bf0bd93ee8e25aebd4384461739d03376a727024f1b7712ec96c4f651",
+              "size": "3821388"
             },
             {
               "host": "x86_64-pc-linux-gnu",
-              "url": "https://github.com/ROBOTIS-GIT/OpenCR/releases/download/1.0.0/opencr_tools_1.0.0.tar.bz2",
-              "archiveFileName": "opencr_tools_1.0.0.tar.bz2",
-              "checksum": "SHA-256:86b547dc98e07c90f17e0a6c45b207153ee8b4344da841f26956f495295a3a6a",
-              "size": "513792"
+              "url": "https://github.com/oroca/oroca_boy/releases/download/0.0.1/orocaboy_tools_0.0.1.tar.bz2",
+              "archiveFileName": "orocaboy_tools_0.0.1.tar.bz2",
+              "checksum": "SHA-256:605cb62bf0bd93ee8e25aebd4384461739d03376a727024f1b7712ec96c4f651",
+              "size": "3821388"
             },
             {
               "host": "i686-mingw32",
-              "url": "https://github.com/ROBOTIS-GIT/OpenCR/releases/download/1.0.0/opencr_tools_1.0.0.tar.bz2",
-              "archiveFileName": "opencr_tools_1.0.0.tar.bz2",
-              "checksum": "SHA-256:86b547dc98e07c90f17e0a6c45b207153ee8b4344da841f26956f495295a3a6a",
-              "size": "513792"
+              "url": "https://github.com/oroca/oroca_boy/releases/download/0.0.1/orocaboy_tools_0.0.1.tar.bz2",
+              "archiveFileName": "orocaboy_tools_0.0.1.tar.bz2",
+              "checksum": "SHA-256:605cb62bf0bd93ee8e25aebd4384461739d03376a727024f1b7712ec96c4f651",
+              "size": "3821388"
             },
             {
               "host": "i386-apple-darwin11",
-              "url": "https://github.com/ROBOTIS-GIT/OpenCR/releases/download/1.0.0/opencr_tools_1.0.0.tar.bz2",
-              "archiveFileName": "opencr_tools_1.0.0.tar.bz2",
-              "checksum": "SHA-256:86b547dc98e07c90f17e0a6c45b207153ee8b4344da841f26956f495295a3a6a",
-              "size": "513792"
+              "url": "https://github.com/oroca/oroca_boy/releases/download/0.0.1/orocaboy_tools_0.0.1.tar.bz2",
+              "archiveFileName": "orocaboy_tools_0.0.1.tar.bz2",
+              "checksum": "SHA-256:605cb62bf0bd93ee8e25aebd4384461739d03376a727024f1b7712ec96c4f651",
+              "size": "3821388"
             }
           ]
         }
