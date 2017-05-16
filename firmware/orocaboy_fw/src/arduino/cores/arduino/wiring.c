@@ -23,36 +23,24 @@ extern "C" {
 #endif
 
 
-	/*
-		There is enough abstract similarity to Arduino that for some of these
-		we can just do the function with a define in the chip.h header
 
-		#define millis HAL_GetTick
-		#define delay HAL_Delay
-	*/
-
-
-/* 
-	Not sure how to do micros when the system clock ticks in milliseconds
-	
-	
-*/ 
-uint32_t micros( void )
-{
-	return hwMicros();
-  return 0;
-}
 
 uint32_t millis(void)
 {
   return HAL_GetTick();
 }
 
-extern void delay( uint32_t dwMs )
+void delay( uint32_t dwMs )
 {
   HAL_Delay(dwMs);
 }
 
+
+
+uint32_t micros( void )
+{
+	return hwMicros();
+}
 
 #ifdef __cplusplus
 }

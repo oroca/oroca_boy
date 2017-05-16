@@ -57,6 +57,7 @@ extern uint32_t micros( void ) ;
  *
  * \param dwMs the number of milliseconds to pause (uint32_t)
  */
+extern uint32_t millis(void);
 extern void delay( uint32_t dwMs ) ;
 
 /**
