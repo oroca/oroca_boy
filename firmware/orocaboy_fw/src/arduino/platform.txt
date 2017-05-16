@@ -102,9 +102,6 @@ recipe.size.regex.data=^(?:\.data|\.bss|\.noinit)\s+([0-9]+).*
 # -------------------
 tools.opencr_ld.cmd=opencr_ld
 tools.opencr_ld.cmd.windows=opencr_ld.exe
-#tools.opencr_ld.path={runtime.hardware.path}/tools/win
-#tools.opencr_ld.path.macosx={runtime.hardware.path}/tools/macosx
-#tools.opencr_ld.path.linux={runtime.hardware.path}/tools/linux
 tools.opencr_ld.path={runtime.tools.opencr_tools.path}/win
 tools.opencr_ld.path.macosx={runtime.tools.opencr_tools.path}/macosx
 tools.opencr_ld.path.linux={runtime.tools.opencr_tools.path}/linux
@@ -115,13 +112,14 @@ tools.opencr_ld.upload.pattern="{path}/{cmd}" "{serial.port}" "115200" "{build.p
 
 
 tools.openocd.cmd=openocd
-tools.openocd.path=
-tools.openocd.path.macosx=
-tools.openocd.path.linux=
+tools.openocd.cmd.windows=openocd.exe
+tools.openocd.path={runtime.tools.orocaboy_tools.path}/win
+tools.openocd.path.macosx={runtime.tools.orocaboy_tools.path}/macosx
+tools.openocd.path.linux={runtime.tools.orocaboy_tools.path}/linux
 
 tools.openocd.upload.params.verbose=-d
 tools.openocd.upload.params.quiet=n
-tools.openocd.upload.pattern="/usr/local/bin/{cmd}"  -f interface/stlink-v2-1.cfg -f target/stm32l4x.cfg -c "program {build.path}/{build.project_name}.elf"  -c "reset run" -c shutdown
+tools.openocd.upload.pattern="{path}/{cmd}" -s {path}/scripts  -f interface/stlink-v2-1.cfg -f target/stm32l4x.cfg -c "program {build.path}/{build.project_name}.elf"  -c "reset run" -c shutdown
 
 tools.dfu_util.cmd=dfu-util
 tools.dfu_util.cmd.windows=dfu-util.exe
