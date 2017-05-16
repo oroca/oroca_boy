@@ -96,8 +96,5 @@ UARTClass Serial1(_HW_DEF_UART2);
 void serialEventRun(void)
 {
   if (Serial.available()) serialEvent();
-  if (Serial1.available()) serialEvent1();
+  //if (Serial1.available()) serialEvent1();
 }
-
-
-
