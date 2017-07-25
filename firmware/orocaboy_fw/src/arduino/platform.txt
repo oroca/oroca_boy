@@ -119,7 +119,8 @@ tools.openocd.path.linux={runtime.tools.orocaboy_tools.path}/linux
 
 tools.openocd.upload.params.verbose=-d
 tools.openocd.upload.params.quiet=n
-tools.openocd.upload.pattern="{path}/{cmd}" -s {path}/scripts  -f interface/stlink-v2-1.cfg -f target/stm32l4x.cfg -c "program {build.path}/{build.project_name}.elf"  -c "reset run" -c shutdown
+#tools.openocd.upload.pattern="{path}/{cmd}" -s {path}/scripts  -f interface/stlink-v2-1.cfg -f target/stm32l4x.cfg -c "program {build.path}/{build.project_name}.elf"  -c "reset run" -c shutdown
+tools.openocd.upload.pattern="{path}/{cmd}" -s {path}/scripts  -f interface/stlink-v2-1.cfg -f target/stm32l4x.cfg -c "program {{{build.path}/{build.project_name}.elf}}"  -c "reset run" -c shutdown
 
 tools.dfu_util.cmd=dfu-util
 tools.dfu_util.cmd.windows=dfu-util.exe

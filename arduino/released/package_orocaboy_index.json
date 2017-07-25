@@ -19,8 +19,8 @@
           },
           "url": "https://github.com/oroca/oroca_boy/releases/download/0.0.1/orocaboy_core_0.0.1.tar.bz2",
           "archiveFileName": "orocaboy_core_0.0.1.tar.bz2",
-          "checksum": "SHA-256:204df68c09bf5e4da26039632e5dc23c1bc0ef6c74334d7aa8bfa9426a6986b2",
-          "size": "8398426",
+          "checksum": "SHA-256:393643507f5147d606d61452c269013a44df62e47e7ad9ee31b103d61523cd47",
+          "size": "8397395",
           "help": {
                     "online": "https://github.com/oroca/oroca_boy"
           },
@@ -86,29 +86,29 @@
               "host": "i686-linux-gnu",
               "url": "https://github.com/oroca/oroca_boy/releases/download/0.0.1/orocaboy_tools_0.0.1.tar.bz2",
               "archiveFileName": "orocaboy_tools_0.0.1.tar.bz2",
-              "checksum": "SHA-256:605cb62bf0bd93ee8e25aebd4384461739d03376a727024f1b7712ec96c4f651",
-              "size": "3821388"
+              "checksum": "SHA-256:3c598b8d588ea20da0d15acd283c19edecd9eee6e153f9a0fa52517512abac57",
+              "size": "4915721"
             },
             {
               "host": "x86_64-pc-linux-gnu",
               "url": "https://github.com/oroca/oroca_boy/releases/download/0.0.1/orocaboy_tools_0.0.1.tar.bz2",
               "archiveFileName": "orocaboy_tools_0.0.1.tar.bz2",
-              "checksum": "SHA-256:605cb62bf0bd93ee8e25aebd4384461739d03376a727024f1b7712ec96c4f651",
-              "size": "3821388"
+              "checksum": "SHA-256:3c598b8d588ea20da0d15acd283c19edecd9eee6e153f9a0fa52517512abac57",
+              "size": "4915721"
             },
             {
               "host": "i686-mingw32",
               "url": "https://github.com/oroca/oroca_boy/releases/download/0.0.1/orocaboy_tools_0.0.1.tar.bz2",
               "archiveFileName": "orocaboy_tools_0.0.1.tar.bz2",
-              "checksum": "SHA-256:605cb62bf0bd93ee8e25aebd4384461739d03376a727024f1b7712ec96c4f651",
-              "size": "3821388"
+              "checksum": "SHA-256:3c598b8d588ea20da0d15acd283c19edecd9eee6e153f9a0fa52517512abac57",
+              "size": "4915721"
             },
             {
               "host": "i386-apple-darwin11",
               "url": "https://github.com/oroca/oroca_boy/releases/download/0.0.1/orocaboy_tools_0.0.1.tar.bz2",
               "archiveFileName": "orocaboy_tools_0.0.1.tar.bz2",
-              "checksum": "SHA-256:605cb62bf0bd93ee8e25aebd4384461739d03376a727024f1b7712ec96c4f651",
-              "size": "3821388"
+              "checksum": "SHA-256:3c598b8d588ea20da0d15acd283c19edecd9eee6e153f9a0fa52517512abac57",
+              "size": "4915721"
             }
           ]
         }
